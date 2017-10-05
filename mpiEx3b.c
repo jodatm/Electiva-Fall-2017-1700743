@@ -23,18 +23,6 @@ int main(int argc,char *argv[]){
 	}
 	MPI_Send(&outmsg, 1, MPI_INT, dest, tag, MPI_COMM_WORLD);
 	MPI_Recv(&inmsg, 1, MPI_INT, source, tag, MPI_COMM_WORLD, &Stat);
-	
-	if(rank==100){
-	  dest = 1;
-	  source = 1;
-	  MPI_Send(&outmsg, 1, MPI_INT, dest, tag, MPI_COMM_WORLD);
-	  MPI_Recv(&inmsg, 1, MPI_INT, source, tag, MPI_COMM_WORLD, &Stat);
-	}else if (rank == 101) {
-	  dest = 0;
-	  source = 0;
-	  MPI_Recv(&inmsg, 1, MPI_INT, source, tag, MPI_COMM_WORLD, &Stat);
-	  MPI_Send(&outmsg, 1, MPI_INT, dest, tag, MPI_COMM_WORLD);
-	 }
 
 	MPI_Get_count(&Stat, MPI_INT, &count);
 	printf("Task %d: Received %d int(s) from task %d with tag %d \n",
